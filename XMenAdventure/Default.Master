@@ -1,0 +1,25 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Default.master.cs" Inherits="XMenAdventure.Default" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <link href="css/styles.css" rel="stylesheet" />
+    <title>X-Men Adventure Game</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <header><img src="images/Xmencomic-logo.svg.png" /></header>
+    
+    <form id="xform" runat="server">
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+        
+    </form>
+    <asp:SiteMapDataSource ID="XmenMaster" runat="server" ShowStartingNode="False" />
+</body>
+</html>
