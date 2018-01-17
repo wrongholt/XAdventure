@@ -8,6 +8,7 @@ using Microsoft.AspNet.Cryptography.KeyDerivation;
 using System.Text;
 using System.Windows.Forms;
 using System.Web.UI;
+using System.Activities;
 
 namespace XMenAdventure
 {
@@ -15,62 +16,49 @@ namespace XMenAdventure
     {
         user newUser = new user();
         private const int PBKDF2IterCount = 1000;
-        public string hiddenName { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblHiddenName.Value = hiddenName;
         }
-        //protected void rogue_Click(object sender, ImageClickEventArgs e)
-        //{
-        //    //System.Diagnostics.Debug.Write("Rogue");
-        //    MessageBox.Show("Rogue");
-        //    lblRogueHidden.Text = "Rogue";
-        //}
-        //protected void character_Click(object sender, RoutedEventArgs e)
-        //{
-           
-        //    ImageButton btnSender = (ImageButton)sender;
-        //    if (btnSender.ID == "btnRogue")
-        //    {
-        //        System.Diagnostics.Debug.Write("Rogue");
-        //        lblRogueHidden.Text = "Rogue";
-        //    }
-        //     if (btnSender == btnGambit)
-        //    {
-        //        System.Diagnostics.Debug.Write("Gambit");
-        //        lblGambitHidden.Text = "Gambit";
-        //    }
-        //     if (btnSender.ID == "btnMagik")
-        //    {
-        //        MessageBox.Show("Magik");
-        //        lblMagikHidden.Text = "Magik";
-        //    }
-        //    if (btnSender.ID == "btnColossus")
-        //    {
-        //        lblColossusHidden.Text = "Colossus";
-        //    }
-        //}
 
+        protected void btnRogue_Click(object sender, ImageClickEventArgs e)
+        {
+            lblRogueHidden.Text = "Rogue";
+        }
+
+        protected void btnGambit_Click(object sender, ImageClickEventArgs e)
+        {
+            lblGambitHidden.Text = "Gambit";
+        }
+
+        protected void btnMagik_Click(object sender, ImageClickEventArgs e)
+        {
+            lblMagikHidden.Text = "Magik";
+        }
+
+        protected void btnColossus_Click(object sender, ImageClickEventArgs e)
+        {
+            lblColossusHidden.Text = "Colossus";
+        }
 
         protected void SignUp_Click(object sender, EventArgs e)
         {
             equipment equip = new equipment();
 
-            //if (lblRogueHidden.Text != null)
-            //{
-            //    newUser.character = lblRogueHidden.Text;
-            //}
-            // else if (lblGambitHidden.Text != null)
-            //{
-            //    newUser.character = lblGambitHidden.Text;
-            //}
-            // else if (lblMagikHidden.Text != null)
-            //{
-            //    newUser.character = lblMagikHidden.Text;
-            //}
-             if (lblHiddenName.Value != null)
+            if (lblRogueHidden.Text != "")
             {
-                newUser.character = lblHiddenName.Value.ToString();
+                newUser.character = lblRogueHidden.Text;
+            }
+            else if (lblGambitHidden.Text != "")
+            {
+                newUser.character = lblGambitHidden.Text;
+            }
+            else if (lblMagikHidden.Text != "")
+            {
+                newUser.character = lblMagikHidden.Text;
+            }
+            else if (lblColossusHidden.Text != "")
+            {
+                newUser.character = lblColossusHidden.Text;
             }
 
 
@@ -94,5 +82,7 @@ namespace XMenAdventure
             FormsAuthentication.RedirectFromLoginPage(txtEmail.Text, false);
             Response.Redirect("LevelOne.aspx");
         }
+
+        
     }
 }

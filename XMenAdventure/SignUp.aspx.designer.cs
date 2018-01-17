@@ -40,13 +40,13 @@ namespace XMenAdventure {
         protected global::System.Web.UI.WebControls.Label lblRogue;
         
         /// <summary>
-        /// lblHidden control.
+        /// lblGambitHidden control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblHidden;
+        protected global::System.Web.UI.WebControls.Label lblGambitHidden;
         
         /// <summary>
         /// btnGambit control.
@@ -119,15 +119,6 @@ namespace XMenAdventure {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblColossus;
-        
-        /// <summary>
-        /// lblHiddenName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField lblHiddenName;
         
         /// <summary>
         /// txtFName control.

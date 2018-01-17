@@ -8,36 +8,35 @@
         <h2 class="auto-style2">Sign Up</h2>
            <div class='container'>
                <asp:Label ID="lblRogueHidden" runat="server" Text="" Visible="False"></asp:Label>
-              <div class='picture'><asp:ImageButton ID="btnRogue" runat="server" ImageUrl="images/rogue1.png" Width="200px" Height="200px" style="margin-right: 5px"  CssClass="hover" />
+              <div class='picture'><asp:ImageButton ID="btnRogue" runat="server" ImageUrl="images/rogue1.png" ClientIDMode="Static" Width="200px" Height="200px" style="margin-right: 5px" CssClass="rogue" OnClick="btnRogue_Click" OnClientClick="btnRogue_Click" />
                 <div class='middle'>
                         <div class='text'>
                             <asp:Label ID="lblRogue" runat="server" Text="Rogue"></asp:Label></div>
                     </div>
                 </div>
-               <asp:Label ID="lblHidden" runat="server" Text="setup(heroName)" Visible="False"></asp:Label>
+               <asp:Label ID="lblGambitHidden" runat="server" Text="" Visible="False"></asp:Label>
              <div class='picture'>
-                <asp:ImageButton ID="btnGambit" runat="server" ImageUrl="images/gambit1.png" Width="200px" Height="200px" style="margin-right: 5px"   CssClass="hover"/>
+                <asp:ImageButton ID="btnGambit" runat="server" ImageUrl="images/gambit1.png" ClientIDMode="Static" Width="200px" Height="200px" style="margin-right: 5px" CssClass="gambit" OnClick="btnGambit_Click" OnClientClick="btnGambit_Click" />
             <div class='middle'>
                         <div class='text'><asp:Label ID="lblGambit" runat="server" Text="Gambit"></asp:Label></div>
                     </div>
                 </div>
                <asp:Label ID="lblMagikHidden" runat="server" Text="" Visible="False"></asp:Label>
              <div class='picture'>
-             <asp:ImageButton ID="btnMagik" runat="server" ImageUrl="images/magik1.png" Width="200px" Height="200px" style="margin-right: 5px"  CssClass="hover"/>
+             <asp:ImageButton ID="btnMagik" runat="server" ImageUrl="images/magik1.png" ClientIDMode="Static" Width="200px" Height="200px" style="margin-right: 5px" CssClass="magik" OnClick="btnMagik_Click" OnClientClick="btnMagik_Click"/>
                  <div class='middle'>
                         <div class='text'><asp:Label ID="lblMagik" runat="server" Text="Magik"></asp:Label></div>
                     </div>
                 </div>
                <asp:Label ID="lblColossusHidden" runat="server" Text="" Visible="False"></asp:Label>
              <div class='picture'>
-                 <asp:ImageButton ID="btnColossus" runat="server" ImageUrl="images/colossus.png" Width="200px" Height="200px"  CssClass="hover"/>
+                 <asp:ImageButton ID="btnColossus" runat="server" ImageUrl="images/colossus.png" ClientIDMode="Static" Width="200px" Height="200px"  CssClass="colossus" OnClick="btnColossus_Click" OnClientClick="btnColossus_Click"/>
         <div class='middle'>
                         <div class='text'><asp:Label ID="lblColossus" runat="server" Text="Colossus"></asp:Label></div>
                     </div>
                 </div>
                 <br/>Please select an item by clicking on it.
             </div>
-        <asp:HiddenField ID="lblHiddenName" runat="server" />
         <div class="auto-style2">
         <br /><br />
         <span>First Name:</span><asp:TextBox ID="txtFName" runat="server"></asp:TextBox><br />
@@ -54,25 +53,6 @@
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
         </div>
     </section>
-    <script src="scripts/jquery-ui.min.js"></script>
-    <script type="text/javascript">
-        function setup() {
-        string name = <%=hiddenName %>;
-            $("#ContentPlaceHolder1_btnRogue").click(function () {
-                name = "Rogue";
-            });
-            $("#ContentPlaceHolder1_btnGambit").click(function () {
-                name = "Gambit";
-            });
-            $("#ContentPlaceHolder1_btnMagik").click(function () {
-                name = "Magik";
-            });
-            $("#ContentPlaceHolder1_btnColossus").click(function () {
-                name = "Colossus";
-             
-            });
 
-        }
-    </script>
 
 </asp:Content>
