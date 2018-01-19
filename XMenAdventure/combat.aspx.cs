@@ -24,6 +24,7 @@ namespace XMenAdventure
         public string[] statementArrayEnd = new string[] {"You were defeated in combat try again!","Your dead fuzzy bunny shouln't have ran!"};
         public int i = 0;
         public int ctr = 3;
+        public int health;
         protected void Page_Load(object sender, EventArgs e)
         {
             enemy = (string)(Session["enemy"]);
@@ -44,6 +45,7 @@ namespace XMenAdventure
                 lblSpecial.Text = dr["specialBonus"].ToString();
                 imgChar.ImageUrl = dr["picture"].ToString();
                 character = dr["character"].ToString();
+                health = Convert.ToInt32(dr["charHealth"].ToString());
                 bonus = Convert.ToInt32(dr["specialBonus"].ToString());
 
             }
@@ -94,8 +96,11 @@ namespace XMenAdventure
                 i = 0;
             }else
             {
+                btnSpecial.Visible = false;
                 i++;
                 txtbattle.Text = newCombat.userCombatPhase(enemy, userEmail, attack) + "\n" + newCombat.enemyCombatPhase(enemy,userEmail);
+                lblHealth.Text = health.ToString();
+                Response.Redirect(Request.RawUrl);
             }
 
         }

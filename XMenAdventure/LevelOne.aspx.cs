@@ -19,6 +19,7 @@ namespace XMenAdventure
         public string equipment = "";
         public string picture = "";
         public string enemy = "";
+        public string save = "";
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["xmenContext"].ToString());
 
         Dictionary<string, string> pictures = new Dictionary<string, string>();
@@ -62,30 +63,54 @@ namespace XMenAdventure
                 lblSpecName.Text = dr["special"].ToString();
                 lblSpecial.Text = dr["specialBonus"].ToString();
                 imgChar.ImageUrl = dr["picture"].ToString();
-                
+                save = dr["savePoint"].ToString();
             }
 
-            if(Session["beforeAttack"] != null)
+            if(Session[save] != null)
             {
                 btnOption1.Visible = false;
                 btnOption2.Visible = false;
                 btnOption111.Visible = true;
                 btnOption112.Visible = true;
+                txtBegin.Visible = false;
+                txt1.Visible = true;
                 txt1.Text = statementArray1[2].ToString();
 
             }
-            if (Session["afterAttack"] != null)
+            if (Session[save] != null)
             {
                
                 btnOption111.Visible = true;
                 btnOption112.Visible = true;
-                txt1.Text = statementArray1[3].ToString();
+                txt1.Text = statementArray1[4].ToString();
 
             }
 
             if (Request.IsAuthenticated)
             {
-                beginning();
+                if (save == "beforeAttack")
+                {
+                    btnOption1.Visible = false;
+                    btnOption2.Visible = false;
+                    btnOption111.Visible = true;
+                    btnOption112.Visible = true;
+                    txtBegin.Visible = false;
+                    txt1.Visible = true;
+                    txt1.Text = statementArray1[2].ToString();
+
+                }
+                if (save == "afterAttack")
+                {
+
+                    btnOption111.Visible = true;
+                    btnOption112.Visible = true;
+                    txt1.Text = statementArray1[4].ToString();
+
+                }else
+                {
+                    beginning();
+                }
+                
             }
             else
             {
@@ -173,7 +198,7 @@ namespace XMenAdventure
                     {
                         MessageBox.Show("Your Equipment is full please remove some equipment.");
                     }
-
+                    
 
                     SqlCommand cmd2 = new SqlCommand("UPDATE equipment Set equipslot1 = @slot1, equipslot2 = @slot2, equipslot3 = @slot3, equipClass1 = @class1, equipClass2 = @class2, equipClass3 = @class3 FROM users INNER JOIN equipment ON (equipment.equipId = users.equipId) WHERE users.email = @userEmail;", conn);
 
@@ -185,6 +210,7 @@ namespace XMenAdventure
                     cmd2.Parameters.AddWithValue("@class3", class3);
                     cmd2.Parameters.AddWithValue("@userEmail", userEmail);
                     cmd2.ExecuteNonQuery();
+                    
                     FormsAuthentication.RedirectFromLoginPage(userEmail, true);
                     Response.Redirect("CharEquipment.aspx");
                 }
@@ -194,33 +220,33 @@ namespace XMenAdventure
         //Path One
         protected void btnOption1_Click(object sender, EventArgs e)
         {
+            save = "beforeAttack";
+            btnSave_Click(sender, e);
+            Session.Add(save, txt1.Text);
             txt1.Visible = true;
             txt2.Visible = true;
             txtEquip1.Visible = true;
             imgEquip.Visible = true;
-            btnOption1.Visible = false;
-            btnOption2.Visible = false;
             txt1.Text = statementArray1[1].ToString();
             EquipmentReward();
             txtEquip1.Text = equipment.ToString(); 
             imgEquip.ImageUrl = picture.ToString();
-            Session.Add("beforeAttack",txt1.Text);
+            
         }
 
         protected void btnOption111_Click(object sender, EventArgs e)
         {
-            btnOption111.Visible = false;
-            btnOption112.Visible = false;
+
             string userEmail = Context.User.Identity.Name;
             txt1.Text = statementArray1[3].ToString();
             txt2.Visible = false;
             imgEnemy1.ImageUrl = pictures["Pyro"];
             Session["enemy"] = "Pyro";
-
+            btnOption111.Visible = false;
+            btnOption112.Visible = false;
             imgEnemy1.Visible = true;
-            //txt3.Visible = true;
             btnCombat.Visible = true;
-            Session.Add("afterAttack", txt1.Text);
+            
 
         }
         protected void btnOption112_Click(object sender, EventArgs e)
@@ -228,7 +254,6 @@ namespace XMenAdventure
             txt2.Text = statementArray2[4].ToString();
             btnOption111.Visible = false;
             btnOption112.Visible = false;
-            //txt3.Visible = true;
         }
 
 
@@ -247,12 +272,10 @@ namespace XMenAdventure
         protected void btnOption221_Click(object sender, EventArgs e)
         {
             txt1.Text = statementArray2[1].ToString();
-           // txt2.Visible = true;
         }
         protected void btnOption22End_Click(object sender, EventArgs e)
         {
             txt2.Text = statementArrayEnd[0].ToString();
-           // txt3.Visible = true;
             btnRestart.Visible = true;
 
         }
@@ -261,6 +284,9 @@ namespace XMenAdventure
 
         protected void btnCombat_Click(object sender, EventArgs e)
         {
+            save = "afterAttack";
+            btnSave_Click(sender, e);
+            Session.Add(save, txt1.Text);
             Response.Redirect("combat.aspx");
 
         }
@@ -278,6 +304,15 @@ namespace XMenAdventure
         protected void btnEquipment_Click(object sender, EventArgs e)
         {
             Response.Redirect("CharEquipment.aspx");
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            string userEmail = Context.User.Identity.Name;
+            SqlCommand cmdSave = new SqlCommand("UPDATE users Set savePoint = @save FROM users WHERE users.email = @userEmail;", conn);
+            cmdSave.Parameters.AddWithValue("@save", save);
+            cmdSave.Parameters.AddWithValue("@userEmail", userEmail);
+            cmdSave.ExecuteNonQuery();
         }
     }
 }

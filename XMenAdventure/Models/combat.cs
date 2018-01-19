@@ -49,7 +49,7 @@ namespace XMenAdventure.Models
             {
                 userChar = dr2["character"].ToString();
                 def = Convert.ToInt32(dr2["charDef"].ToString());
-                userHealth = Convert.ToInt32(dr2["health"].ToString());
+                userHealth = Convert.ToInt32(dr2["charHealth"].ToString());
                 bonus = Convert.ToInt32(dr2["specialBonus"].ToString());
             }
 
@@ -98,7 +98,7 @@ namespace XMenAdventure.Models
         public string enemyCombatPhase(string enemy, string userEmail)
         {
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["xmenContext"].ToString());
-            int ctr = 0;
+            int ctr = 3;
             int i = 0;
             SqlCommand cmd2 = new SqlCommand("SELECT * FROM users,characterStats WHERE users.email = @email and users.character = characterStats.name;", conn);
             cmd2.Parameters.AddWithValue("@email", userEmail);
@@ -109,7 +109,7 @@ namespace XMenAdventure.Models
                 userChar = dr2["character"].ToString();
                 atk = Convert.ToInt32(dr2["charAtk"].ToString());
                 def = Convert.ToInt32(dr2["charDef"].ToString());
-                userHealth = Convert.ToInt32(dr2["health"].ToString());
+                userHealth = Convert.ToInt32(dr2["charHealth"].ToString());
                 
             }
 
@@ -132,8 +132,9 @@ namespace XMenAdventure.Models
             else
             {
                 enemyAtk = Convert.ToInt32(enemyatk + d4);
+                i++;
             }
-            i++;
+            
             newUserHealth = userHealth;
             if (newUserHealth > 0)
             {
@@ -145,10 +146,11 @@ namespace XMenAdventure.Models
                     cmdHealth.Parameters.Clear();
                     cmdHealth.Connection = conn;
                     cmdHealth.CommandText = "UPDATE characterStats Set health = @newhealth FROM characterStats as cs WHERE cs.name = @name;";
-                    cmdHealth.Parameters.AddWithValue("@newhealth", newUserHealth);//(new SqlParameter("@newhealth", SqlDbType.Int)).Value = newUserHealth;
+                    cmdHealth.Parameters.Add(new SqlParameter("@newhealth", SqlDbType.Int)).Value = newUserHealth;
                     cmdHealth.Parameters.AddWithValue("@name", userChar);
                     cmdHealth.ExecuteNonQuery();
-                    return "You got for " + enemyDmg + " damage and you have " + newUserHealth + " remaining health.";
+                    
+                    return "You got hit for " + enemyDmg + " damage and you have " + newUserHealth + " remaining health.";
 
                 }
                 else

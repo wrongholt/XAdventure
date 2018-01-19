@@ -126,59 +126,80 @@ namespace XMenAdventure
                 lblSpeed.Text = (speed).ToString();
             }
             //slot 1
+      
             if (imgSlot1.CssClass == "hat")
             {
                 btnEquip1.Text = "Equip to head";
                 btnEquip1.Visible = true;
+                btnRemove1.Visible = true;
+
             }
             else if (imgSlot1.CssClass == "belt")
             {
                 btnEquip1.Text = "Equip to belt";
                 btnEquip1.Visible = true;
+                btnRemove1.Visible = true;
+
             }
             else if (imgSlot1.CssClass == "boots")
             {
                 btnEquip1.Text = "Equip to feet";
                 btnEquip1.Visible = true;
+                btnRemove1.Visible = true;
+
             }
             //slot 2
+
             if (imgSlot2.CssClass == "hat")
             {
                 btnEquip2.Text = "Equip to head";
-                btnEquip1.Visible = true;
+                btnEquip2.Visible = true;
+                btnRemove2.Visible = true;
+
             }
             else if (imgSlot2.CssClass == "belt")
             {
                 btnEquip2.Text = "Equip to belt";
-                btnEquip1.Visible = true;
+                btnEquip2.Visible = true;
+                btnRemove2.Visible = true;
+
             }
             else if (imgSlot2.CssClass == "boots")
             {
                 btnEquip2.Text = "Equip to feet";
-                btnEquip1.Visible = true;
+                btnEquip2.Visible = true;
+                btnRemove2.Visible = true;
+
             }
             //slot 3
+
             if (imgSlot3.CssClass == "hat")
             {
                 btnEquip3.Text = "Equip to head";
-                btnEquip1.Visible = true;
+                btnEquip3.Visible = true;
+                btnRemove3.Visible = true;
+
             }
             else if (imgSlot3.CssClass == "belt")
             {
                 btnEquip3.Text = "Equip to belt";
-                btnEquip1.Visible = true;
+                btnEquip3.Visible = true;
+                btnRemove3.Visible = true;
+
             }
             else if (imgSlot3.CssClass == "boots")
             {
                 btnEquip3.Text = "Equip to feet";
-                btnEquip1.Visible = true;
+                btnEquip3.Visible = true;
+                btnRemove3.Visible = true;
+
             }
 
 
 
         }
         
-
+      
         protected void btnEquip_Click(object sender, EventArgs e)
         {
             string userEmail = Context.User.Identity.Name;
@@ -210,6 +231,9 @@ namespace XMenAdventure
             cmd3.Parameters.AddWithValue("@email", userEmail);
             cmd3.CommandText = "Update equipment Set equipSlot1 = Null, equipClass1 = Null FROM equipment INNER JOIN users ON (equipment.equipId = users.equipId)WHERE users.email = @email;";
             cmd3.ExecuteNonQuery();
+            btnEquip1.Visible = false;
+            btnRemove1.Visible = false;
+            Response.Redirect(Request.RawUrl);
         }
         protected void btnEquip2_Click(object sender, EventArgs e)
         {
@@ -244,6 +268,9 @@ namespace XMenAdventure
             cmd3.Parameters.AddWithValue("@email", userEmail);
             cmd3.CommandText = "Update equipment Set equipSlot2 = Null, equipClass2 = Null FROM equipment INNER JOIN users ON (equipment.equipId = users.equipId)WHERE users.email = @email;";
             cmd3.ExecuteNonQuery();
+            btnEquip2.Visible = false;
+            btnRemove2.Visible = false;
+            Response.Redirect(Request.RawUrl);
         }
         protected void btnEquip3_Click(object sender, EventArgs e)
         {
@@ -275,6 +302,9 @@ namespace XMenAdventure
             cmd3.Parameters.AddWithValue("@email", userEmail);
             cmd3.CommandText = "Update equipment Set equipSlot3 = Null, equipClass3 = Null FROM equipment INNER JOIN users ON (equipment.equipId = users.equipId)WHERE users.email = @email;";
             cmd3.ExecuteNonQuery();
+            btnEquip3.Visible = false;
+            btnRemove3.Visible = false;
+            Response.Redirect(Request.RawUrl);
         }
         protected void btnBack_Click(object sender, EventArgs e)
         {
@@ -283,6 +313,19 @@ namespace XMenAdventure
             
         }
 
-       
+        protected void btnRemove1_Click(object sender, EventArgs e)
+        {
+            Unequip1();
+        }
+
+        protected void btnRemove2_Click(object sender, EventArgs e)
+        {
+            Unequip2();
+        }
+
+        protected void btnRemove3_Click(object sender, EventArgs e)
+        {
+            Unequip3();
+        }
     }
 }

@@ -58,6 +58,15 @@ namespace XMenAdventure {
         protected global::System.Web.UI.WebControls.Button btnEquip1;
         
         /// <summary>
+        /// btnRemove1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRemove1;
+        
+        /// <summary>
         /// imgSlot2 control.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,15 @@ namespace XMenAdventure {
         protected global::System.Web.UI.WebControls.Button btnEquip2;
         
         /// <summary>
+        /// btnRemove2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRemove2;
+        
+        /// <summary>
         /// imgSlot3 control.
         /// </summary>
         /// <remarks>
@@ -92,6 +110,15 @@ namespace XMenAdventure {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnEquip3;
+        
+        /// <summary>
+        /// btnRemove3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRemove3;
         
         /// <summary>
         /// lblCharacter control.

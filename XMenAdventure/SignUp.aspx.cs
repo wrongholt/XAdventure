@@ -9,6 +9,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Web.UI;
 using System.Activities;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace XMenAdventure
 {
@@ -61,8 +63,17 @@ namespace XMenAdventure
                 newUser.character = lblColossusHidden.Text;
             }
 
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["xmenContext"].ToString());
+            SqlCommand cmd = new SqlCommand("SELECT * FROM characterStats WHERE name = @character;", conn);
+            cmd.Parameters.AddWithValue("@character", newUser.character);
+            conn.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
 
-            string password = txtPassword.Text;
+            while (dr.Read())
+            {
+                newUser.charHealth = Convert.ToInt32(dr["charHealth"].ToString());
+            }
+                string password = txtPassword.Text;
             PasswordHasher PH = new PasswordHasher();
             string hashed = PH.CreateHash(password);
 

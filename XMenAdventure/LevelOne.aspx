@@ -5,8 +5,8 @@
     <section class="top">
         <asp:TextBox ID="txtBegin"  runat="server" Width="100%" TextMode="MultiLine" CssClass="textBubble" BorderStyle="None"></asp:TextBox>
         <asp:Button ID="btnOption1" runat="server" Text="Option 1" OnClick="btnOption1_Click" /><asp:Button ID="btnOption2" runat="server" Text="Option 2" OnClick="btnOption2_Click" />
-        <asp:TextBox ID="txt1" runat="server" Width="100%" TextMode="MultiLine" Enabled="True" Visible="False" CssClass="textBubble"></asp:TextBox>
-        <asp:TextBox ID="txtEquip1" runat="server" Width="100%" TextMode="MultiLine" Enabled="True" Visible="False" CssClass="textBubble"></asp:TextBox>
+        <asp:TextBox ID="txt1" runat="server" Width="100%" TextMode="MultiLine" Enabled="True" Visible="False" CssClass="textBubble" AutoPostBack="True"></asp:TextBox>
+        <asp:TextBox ID="txtEquip1" runat="server" Width="100%" TextMode="MultiLine" Enabled="True" Visible="False" CssClass="textBubble" AutoPostBack="True"></asp:TextBox>
         <asp:ImageButton ID="imgEquip" Height="150" Width="150" ImageAlign="Left" Visible="False" runat="server" OnClick="imgEquip_Click"/>
      
         <asp:TextBox ID="txt2" runat="server" Width="100%" TextMode="MultiLine" Enabled="True" Visible="False" CssClass="textBubble"></asp:TextBox>
@@ -34,6 +34,7 @@
         </div>
         <nav>
             <asp:Button ID="btnEquipment" runat="server" Text="To Equipment" OnClick="btnEquipment_Click" />
+            <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
         </nav>
     </section>
 </asp:Content>

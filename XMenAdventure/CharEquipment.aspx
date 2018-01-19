@@ -16,12 +16,15 @@
              <div id="backpack">
                  <div id="slot1" class="itemSlot"><asp:Image ID="imgSlot1" runat="server" /></div>
                  <asp:Button ID="btnEquip1" runat="server" Text="" OnClick="btnEquip_Click" Visible ="false"/>
+                 <asp:Button ID="btnRemove1" runat="server" Text="Remove Item" OnClick="btnRemove1_Click" Visible ="false"/>
 
                  <div id="slot2" class="itemSlot"><asp:Image ID="imgSlot2" runat="server" /></div>
                  <asp:Button ID="btnEquip2" runat="server" Text="" OnClick="btnEquip2_Click" Visible ="false"/>
+                 <asp:Button ID="btnRemove2" runat="server" Text="Remove Item" OnClick="btnRemove2_Click" Visible ="false"/>
             
                  <div id="slot3" class="itemSlot"><asp:Image ID="imgSlot3" runat="server" /></div>
                  <asp:Button ID="btnEquip3" runat="server" Text="" OnClick="btnEquip3_Click" Visible ="false"/>
+                 <asp:Button ID="btnRemove3" runat="server" Text="Remove Item" OnClick="btnRemove3_Click" Visible ="false" />
                
              </div>
             </div>

@@ -20,6 +20,7 @@ namespace XMenAdventure.Models
         [ForeignKey("equipment")]
         public int equipId { get; set; }
         public virtual equipment equipment { get; set; }
-        public int health { get; set; }
+        public int charHealth { get; set; }
+        public string savePoint { get; set; }
     }
 }

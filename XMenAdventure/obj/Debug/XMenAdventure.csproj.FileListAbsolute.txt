@@ -95,3 +95,5 @@ C:\Users\Will\Documents\Visual Studio 2015\Projects\XMenAdventure\XMenAdventure\
 C:\Users\Will\Documents\Visual Studio 2015\Projects\XMenAdventure\XMenAdventure\bin\System.Diagnostics.DiagnosticSource.dll
 C:\Users\Will\Documents\Visual Studio 2015\Projects\XMenAdventure\XMenAdventure\bin\Microsoft.AspNet.TelemetryCorrelation.xml
 C:\Users\Will\Documents\Visual Studio 2015\Projects\XMenAdventure\XMenAdventure\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\Will\Documents\Visual Studio 2015\Projects\XMenAdventure\XMenAdventure\obj\Debug\XMenAdventure.Migrations.save.resources
+C:\Users\Will\Documents\Visual Studio 2015\Projects\XMenAdventure\XMenAdventure\obj\Debug\XMenAdventure.Migrations.charHealth.resources

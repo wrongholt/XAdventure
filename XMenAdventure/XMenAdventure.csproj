@@ -216,7 +216,9 @@
   <ItemGroup>
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default.Master.cs">
@@ -257,6 +259,14 @@
     <Compile Include="Migrations\201801152051084_userHealth.cs" />
     <Compile Include="Migrations\201801152051084_userHealth.Designer.cs">
       <DependentUpon>201801152051084_userHealth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801171612219_save.cs" />
+    <Compile Include="Migrations\201801171612219_save.Designer.cs">
+      <DependentUpon>201801171612219_save.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801181348256_charHealth.cs" />
+    <Compile Include="Migrations\201801181348256_charHealth.Designer.cs">
+      <DependentUpon>201801181348256_charHealth.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\characterStats.cs" />
@@ -328,6 +338,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801152051084_userHealth.resx">
       <DependentUpon>201801152051084_userHealth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801171612219_save.resx">
+      <DependentUpon>201801171612219_save.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801181348256_charHealth.resx">
+      <DependentUpon>201801181348256_charHealth.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
