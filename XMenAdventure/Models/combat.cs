@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Web;
 
 
 namespace XMenAdventure.Models
@@ -21,6 +16,7 @@ namespace XMenAdventure.Models
         public int userHealth;
         public int newUserHealth;
 
+        public string specialName;
         public int userAtk;
         public int enemyAtk;
         public int enemyDmg;
@@ -36,7 +32,7 @@ namespace XMenAdventure.Models
         
       
 
-        public string userCombatPhase(string enemy, string userEmail, int atk)
+        public string userCombatPhase(string enemy, string userEmail, int attack)
         {
             
             d4 = roll.d4Roll.Next(4);
@@ -48,12 +44,12 @@ namespace XMenAdventure.Models
             while (dr2.Read())
             {
                 userChar = dr2["character"].ToString();
-                def = Convert.ToInt32(dr2["charDef"].ToString());
-                userHealth = Convert.ToInt32(dr2["charHealth"].ToString());
+                def = Convert.ToInt32(dr2["def"].ToString());
+                userHealth = Convert.ToInt32(dr2["currentHealth"].ToString());
                 bonus = Convert.ToInt32(dr2["specialBonus"].ToString());
             }
 
-            SqlCommand cmdEnemy = new SqlCommand("SELECT * FROM characterStats as cs WHERE cs.name = @name;", conn);
+            SqlCommand cmdEnemy = new SqlCommand("SELECT * FROM characterStats WHERE name = @name;", conn);
             cmdEnemy.Parameters.AddWithValue("@name", enemy);
             SqlDataReader drenemy = cmdEnemy.ExecuteReader();
             while (drenemy.Read())
@@ -64,8 +60,8 @@ namespace XMenAdventure.Models
             }
             newEnemyHealth = enemyHealth;
 
-            userAtk = Convert.ToInt32(atk + d4);
-            if (newEnemyHealth > 0)
+            userAtk = Convert.ToInt32(attack + d4);
+            if (newEnemyHealth >= 0)
             {
 
                 if (userAtk >= enemydef)
@@ -75,7 +71,7 @@ namespace XMenAdventure.Models
                     cmdHealth.Parameters.Clear();
                     cmdHealth.Connection = conn;
                     cmdHealth.CommandText = "UPDATE characterStats Set health = @newhealth FROM characterStats as cs WHERE cs.name = @name;";
-                    cmdHealth.Parameters.Add(new SqlParameter("@newhealth", SqlDbType.Int)).Value = newEnemyHealth;
+                    cmdHealth.Parameters.AddWithValue("@newhealth", newEnemyHealth);
                     cmdHealth.Parameters.AddWithValue("@name", enemy);
                     cmdHealth.ExecuteNonQuery();
                     return "You hit your target and did " + userDmg + " damage to the enemy, " + enemy + " has " + newEnemyHealth + " remaining health.";
@@ -97,19 +93,20 @@ namespace XMenAdventure.Models
         }
         public string enemyCombatPhase(string enemy, string userEmail)
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["xmenContext"].ToString());
             int ctr = 3;
             int i = 0;
-            SqlCommand cmd2 = new SqlCommand("SELECT * FROM users,characterStats WHERE users.email = @email and users.character = characterStats.name;", conn);
-            cmd2.Parameters.AddWithValue("@email", userEmail);
+
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["xmenContext"].ToString());
             conn.Open();
+            SqlCommand cmd2 = new SqlCommand("SELECT * FROM users,characterStats WHERE users.email = @email and users.character = characterStats.name;", conn);
+            cmd2.Parameters.AddWithValue("@email", userEmail); 
             SqlDataReader dr2 = cmd2.ExecuteReader();
             while (dr2.Read())
             {
                 userChar = dr2["character"].ToString();
-                atk = Convert.ToInt32(dr2["charAtk"].ToString());
-                def = Convert.ToInt32(dr2["charDef"].ToString());
-                userHealth = Convert.ToInt32(dr2["charHealth"].ToString());
+                atk = Convert.ToInt32(dr2["atk"].ToString());
+                def = Convert.ToInt32(dr2["def"].ToString());
+                userHealth = Convert.ToInt32(dr2["currentHealth"].ToString());
                 
             }
 
@@ -124,19 +121,22 @@ namespace XMenAdventure.Models
                 enemydef = Convert.ToInt32(drenemy["charDef"].ToString());
                 enemyHealth = Convert.ToInt32(drenemy["health"].ToString());
                 enemyBonus = Convert.ToInt32(drenemy["specialBonus"].ToString());
+                specialName = drenemy["special"].ToString();
             }
             if (i == ctr)
             {
                 enemyAtk = Convert.ToInt32(enemyatk + d4 + bonus);
+                specialName.ToString();
+                i = 0;
             }
             else
             {
                 enemyAtk = Convert.ToInt32(enemyatk + d4);
-                i++;
+                i += 1;
             }
             
             newUserHealth = userHealth;
-            if (newUserHealth > 0)
+            if (newUserHealth >= 0)
             {
 
                 if (enemyAtk >= def)
@@ -145,9 +145,9 @@ namespace XMenAdventure.Models
                     newUserHealth -= enemyDmg;
                     cmdHealth.Parameters.Clear();
                     cmdHealth.Connection = conn;
-                    cmdHealth.CommandText = "UPDATE characterStats Set health = @newhealth FROM characterStats as cs WHERE cs.name = @name;";
-                    cmdHealth.Parameters.Add(new SqlParameter("@newhealth", SqlDbType.Int)).Value = newUserHealth;
-                    cmdHealth.Parameters.AddWithValue("@name", userChar);
+                    cmdHealth.CommandText = "UPDATE users Set currentHealth = @newhealth FROM users WHERE email = @email;";
+                    cmdHealth.Parameters.AddWithValue("@newhealth", newUserHealth);
+                    cmdHealth.Parameters.AddWithValue("@email", userEmail);
                     cmdHealth.ExecuteNonQuery();
                     
                     return "You got hit for " + enemyDmg + " damage and you have " + newUserHealth + " remaining health.";

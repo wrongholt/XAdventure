@@ -58,22 +58,22 @@ namespace XMenAdventure {
         protected global::System.Web.UI.WebControls.Button btnRun;
         
         /// <summary>
-        /// btnRestart control.
+        /// imgEnemy control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRestart;
+        protected global::System.Web.UI.WebControls.Image imgEnemy;
         
         /// <summary>
-        /// btnRest control.
+        /// lblEnemy control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRest;
+        protected global::System.Web.UI.WebControls.Label lblEnemy;
         
         /// <summary>
         /// imgChar control.
@@ -139,15 +139,6 @@ namespace XMenAdventure {
         protected global::System.Web.UI.WebControls.Label lblSecial;
         
         /// <summary>
-        /// lblHealth control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblHealth;
-        
-        /// <summary>
         /// lblSpecial control.
         /// </summary>
         /// <remarks>
@@ -157,12 +148,48 @@ namespace XMenAdventure {
         protected global::System.Web.UI.WebControls.Label lblSpecial;
         
         /// <summary>
-        /// MainMenu control.
+        /// lblHealth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Menu MainMenu;
+        protected global::System.Web.UI.WebControls.Label lblHealth;
+        
+        /// <summary>
+        /// lblI control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblI;
+        
+        /// <summary>
+        /// btnRestart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRestart;
+        
+        /// <summary>
+        /// btnRest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRest;
+        
+        /// <summary>
+        /// btnBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBack;
     }
 }

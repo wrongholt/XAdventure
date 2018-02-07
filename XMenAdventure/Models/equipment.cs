@@ -20,6 +20,9 @@ namespace XMenAdventure.Models
         public string equipClass1 { get; set;}
         public string equipClass2 { get; set; }
         public string equipClass3 { get; set; }
+        public string slot1Desc { get; set; }
+        public string slot2Desc { get; set; }
+        public string slot3Desc { get; set; }
 
 
     }

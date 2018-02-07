@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Activities;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Windows.Forms;
-using XMenAdventure.Models;
 
 namespace XMenAdventure
 {
@@ -31,6 +23,11 @@ namespace XMenAdventure
         public int atk = 0;
         public int def = 0;
         public int speed = 0;
+        public int newSpeed ;
+        public int newDef;
+        public int newAtk;
+        public string userEmail = "";
+        public string description = "";
 
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["xmenContext"].ToString());
 
@@ -38,9 +35,9 @@ namespace XMenAdventure
         protected void Page_Load(object sender, EventArgs e)
         {
 
-           
+            
 
-            string userEmail = Context.User.Identity.Name;
+           userEmail = Context.User.Identity.Name;
             SqlCommand cmd = new SqlCommand("SELECT * FROM equipment,users,characterStats,equipmentList WHERE users.email = @email and users.equipId = equipment.equipId and users.character = characterStats.name;", conn);
             cmd.Parameters.AddWithValue("@email", userEmail);
             conn.Open();
@@ -55,8 +52,11 @@ namespace XMenAdventure
                 lblSpecName.Text = dr["special"].ToString();
                 lblSpecial.Text = dr["specialBonus"].ToString();
                 imgSlot1.ImageUrl = dr["equipSlot1"].ToString();
+                imgSlot1.AlternateText = dr["slot1Desc"].ToString();
                 imgSlot2.ImageUrl = dr["equipSlot2"].ToString();
+                imgSlot2.AlternateText = dr["slot2Desc"].ToString();
                 imgSlot3.ImageUrl = dr["equipSlot3"].ToString();
+                imgSlot3.AlternateText = dr["slot3Desc"].ToString();
                 imgSlot1.CssClass = dr["equipClass1"].ToString();
                 imgSlot2.CssClass = dr["equipClass2"].ToString();
                 imgSlot3.CssClass = dr["equipClass3"].ToString();
@@ -64,8 +64,8 @@ namespace XMenAdventure
                 bottom.ImageUrl = dr["boots"].ToString();
                 middle.ImageUrl = dr["belt"].ToString();
             }
+            
 
-           
             SqlCommand cmd2 = new SqlCommand("SELECT equipmentList.name, equipmentList.desciption, equipmentList.atkBonus, equipmentList.speedBonus,equipmentList.defBonus FROM equipment,users,characterStats,equipmentList WHERE users.email = @email and users.equipId = equipment.equipId and characterStats.name = users.character and equipmentList.picture = equipment.head;", conn);
             cmd2.Parameters.AddWithValue("@email", userEmail);
             SqlDataReader dr2 = cmd2.ExecuteReader();
@@ -104,46 +104,46 @@ namespace XMenAdventure
             }
             if (bootsAtkbonus > 0 || beltAtkbonus > 0 || headAtkbonus > 0)
             {
-                lblAtk.Text = (atk + bootsAtkbonus + beltAtkbonus + headAtkbonus).ToString() ;
+                newAtk = (atk + bootsAtkbonus + beltAtkbonus + headAtkbonus) ;
             }
             else
             {
-                lblAtk.Text = (atk).ToString();
+                newAtk = (atk);
             }
             if (bootsDefbonus > 0 || beltDefbonus > 0 || headDefbonus > 0)
             {
-                lblDefense.Text = (def + bootsDefbonus + beltDefbonus + headDefbonus).ToString();
+                newDef = (def + bootsDefbonus + beltDefbonus + headDefbonus);
             }else
             {
-                lblDefense.Text = (def).ToString();
+                newDef = (def);
             }
             if (bootsSpeedbonus > 0 || beltSpeedbonus > 0 || headSpeedbonus > 0)
             {
-                lblSpeed.Text = (speed + bootsSpeedbonus + beltSpeedbonus + headSpeedbonus).ToString();
+                newSpeed = (speed + bootsSpeedbonus + beltSpeedbonus + headSpeedbonus);
             }
             else
             {
-                lblSpeed.Text = (speed).ToString();
+                newSpeed = (speed);
             }
             //slot 1
       
             if (imgSlot1.CssClass == "hat")
             {
-                btnEquip1.Text = "Equip to head";
+                btnEquip1.Text = "Equip";
                 btnEquip1.Visible = true;
                 btnRemove1.Visible = true;
 
             }
             else if (imgSlot1.CssClass == "belt")
             {
-                btnEquip1.Text = "Equip to belt";
+                btnEquip1.Text = "Equip";
                 btnEquip1.Visible = true;
                 btnRemove1.Visible = true;
 
             }
             else if (imgSlot1.CssClass == "boots")
             {
-                btnEquip1.Text = "Equip to feet";
+                btnEquip1.Text = "Equip";
                 btnEquip1.Visible = true;
                 btnRemove1.Visible = true;
 
@@ -152,21 +152,21 @@ namespace XMenAdventure
 
             if (imgSlot2.CssClass == "hat")
             {
-                btnEquip2.Text = "Equip to head";
+                btnEquip2.Text = "Equip";
                 btnEquip2.Visible = true;
                 btnRemove2.Visible = true;
 
             }
             else if (imgSlot2.CssClass == "belt")
             {
-                btnEquip2.Text = "Equip to belt";
+                btnEquip2.Text = "Equip";
                 btnEquip2.Visible = true;
                 btnRemove2.Visible = true;
 
             }
             else if (imgSlot2.CssClass == "boots")
             {
-                btnEquip2.Text = "Equip to feet";
+                btnEquip2.Text = "Equip";
                 btnEquip2.Visible = true;
                 btnRemove2.Visible = true;
 
@@ -175,34 +175,36 @@ namespace XMenAdventure
 
             if (imgSlot3.CssClass == "hat")
             {
-                btnEquip3.Text = "Equip to head";
+                btnEquip3.Text = "Equip";
                 btnEquip3.Visible = true;
                 btnRemove3.Visible = true;
 
             }
             else if (imgSlot3.CssClass == "belt")
             {
-                btnEquip3.Text = "Equip to belt";
+                btnEquip3.Text = "Equip";
                 btnEquip3.Visible = true;
                 btnRemove3.Visible = true;
 
             }
             else if (imgSlot3.CssClass == "boots")
             {
-                btnEquip3.Text = "Equip to feet";
+                btnEquip3.Text = "Equip";
                 btnEquip3.Visible = true;
                 btnRemove3.Visible = true;
 
             }
 
-
+            update();
+            lblAtk.Text = newAtk.ToString();
+            lblDefense.Text = newDef.ToString();
+            lblSpeed.Text = newSpeed.ToString();
 
         }
         
       
         protected void btnEquip_Click(object sender, EventArgs e)
         {
-            string userEmail = Context.User.Identity.Name;
             SqlCommand cmd = new SqlCommand("SELECT * FROM equipment,users WHERE users.email = @email and users.equipId = equipment.equipId;", conn);
             cmd.Parameters.AddWithValue("@email", userEmail);
             SqlDataReader dr = cmd.ExecuteReader();
@@ -220,16 +222,16 @@ namespace XMenAdventure
                     cmd2.ExecuteNonQuery();
                 
             }
+            update();
             Unequip1();
         }
         protected void Unequip1()
         {
-            string userEmail = Context.User.Identity.Name;
 
             SqlCommand cmd3 = new SqlCommand();
             cmd3.Connection = conn;
             cmd3.Parameters.AddWithValue("@email", userEmail);
-            cmd3.CommandText = "Update equipment Set equipSlot1 = Null, equipClass1 = Null FROM equipment INNER JOIN users ON (equipment.equipId = users.equipId)WHERE users.email = @email;";
+            cmd3.CommandText = "Update equipment Set equipSlot1 = Null, equipClass1 = Null, slot1Desc = Null FROM equipment INNER JOIN users ON (equipment.equipId = users.equipId)WHERE users.email = @email;";
             cmd3.ExecuteNonQuery();
             btnEquip1.Visible = false;
             btnRemove1.Visible = false;
@@ -237,7 +239,6 @@ namespace XMenAdventure
         }
         protected void btnEquip2_Click(object sender, EventArgs e)
         {
-            string userEmail = Context.User.Identity.Name;
             SqlCommand cmd = new SqlCommand("SELECT * FROM equipment,users WHERE users.email = @email and users.equipId = equipment.equipId;", conn);
             cmd.Parameters.AddWithValue("@email", userEmail);
             SqlDataReader dr = cmd.ExecuteReader();
@@ -253,20 +254,16 @@ namespace XMenAdventure
                 cmd2.CommandText = "IF @slot1 = 'hat' UPDATE equipment Set head = equipSlot2 FROM equipment INNER JOIN users ON (equipment.equipId = users.equipId) WHERE users.email = @email IF @slot1 = 'belt' UPDATE equipment Set belt = equipSlot2, equipSlot2 = NULL FROM equipment INNER JOIN users ON (equipment.equipId = users.equipId) WHERE users.email = @email IF @slot1 = 'boots' UPDATE equipment Set boots = equipSlot2, equipSlot2 = NULL FROM equipment INNER JOIN users ON (equipment.equipId = users.equipId) WHERE users.email = @email;";
                 cmd2.Parameters.AddWithValue("@email", userEmail);
                     cmd2.ExecuteNonQuery();
-              
-                
-
             }
+            update();
             Unequip2();
         }
         protected void Unequip2()
         {
-            string userEmail = Context.User.Identity.Name;
-
             SqlCommand cmd3 = new SqlCommand();
             cmd3.Connection = conn;
             cmd3.Parameters.AddWithValue("@email", userEmail);
-            cmd3.CommandText = "Update equipment Set equipSlot2 = Null, equipClass2 = Null FROM equipment INNER JOIN users ON (equipment.equipId = users.equipId)WHERE users.email = @email;";
+            cmd3.CommandText = "Update equipment Set equipSlot2 = Null, equipClass2 = Null, slot2Desc = Null FROM equipment INNER JOIN users ON (equipment.equipId = users.equipId)WHERE users.email = @email;";
             cmd3.ExecuteNonQuery();
             btnEquip2.Visible = false;
             btnRemove2.Visible = false;
@@ -274,7 +271,6 @@ namespace XMenAdventure
         }
         protected void btnEquip3_Click(object sender, EventArgs e)
         {
-            string userEmail = Context.User.Identity.Name;
             SqlCommand cmd = new SqlCommand("SELECT * FROM equipment,users WHERE users.email = @email and users.equipId = equipment.equipId;", conn);
             cmd.Parameters.AddWithValue("@email", userEmail);
             SqlDataReader dr = cmd.ExecuteReader();
@@ -282,7 +278,6 @@ namespace XMenAdventure
             while (dr.Read())
             {
                 equipClass = dr["equipClass3"].ToString();
-
                 SqlCommand cmd2 = new SqlCommand();
                 cmd2.Connection = conn;
                 cmd2.Parameters.AddWithValue("@slot1", equipClass);
@@ -291,26 +286,35 @@ namespace XMenAdventure
                     cmd2.ExecuteNonQuery();
 
             }
+            update();
             Unequip3();
         }
         protected void Unequip3()
         {
-            string userEmail = Context.User.Identity.Name;
 
             SqlCommand cmd3 = new SqlCommand();
             cmd3.Connection = conn;
             cmd3.Parameters.AddWithValue("@email", userEmail);
-            cmd3.CommandText = "Update equipment Set equipSlot3 = Null, equipClass3 = Null FROM equipment INNER JOIN users ON (equipment.equipId = users.equipId)WHERE users.email = @email;";
+            cmd3.CommandText = "Update equipment Set equipSlot3 = Null, equipClass3 = Null, slot3Desc = Null FROM equipment INNER JOIN users ON (equipment.equipId = users.equipId)WHERE users.email = @email;";
             cmd3.ExecuteNonQuery();
             btnEquip3.Visible = false;
             btnRemove3.Visible = false;
             Response.Redirect(Request.RawUrl);
         }
+        protected void update()
+        {
+            SqlCommand cmd3 = new SqlCommand();
+            cmd3.Connection = conn;
+            cmd3.Parameters.AddWithValue("@email", userEmail);
+            cmd3.Parameters.AddWithValue("@atk", newAtk);
+            cmd3.Parameters.AddWithValue("@speed", newSpeed);
+            cmd3.Parameters.AddWithValue("@def", newDef);
+            cmd3.CommandText = "Update users Set atk = @atk, speed = @speed, def = @def FROM users WHERE users.email = @email;";
+            cmd3.ExecuteNonQuery();
+        }
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            
                 Response.Redirect("LevelOne.aspx");
-            
         }
 
         protected void btnRemove1_Click(object sender, EventArgs e)

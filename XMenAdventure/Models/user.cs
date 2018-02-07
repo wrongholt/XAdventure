@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace XMenAdventure.Models
 {
@@ -20,7 +16,11 @@ namespace XMenAdventure.Models
         [ForeignKey("equipment")]
         public int equipId { get; set; }
         public virtual equipment equipment { get; set; }
+        public int atk { get; set; }
+        public int speed { get; set; }
+        public int def { get; set; }
         public int charHealth { get; set; }
+        public int currentHealth { get; set; }
         public string savePoint { get; set; }
     }
 }

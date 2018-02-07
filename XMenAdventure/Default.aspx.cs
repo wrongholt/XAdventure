@@ -1,17 +1,7 @@
-﻿using Microsoft.AspNet.Cryptography.KeyDerivation;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Configuration;
-using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Web;
 using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Windows.Forms;
 using XMenAdventure.Models;
 
 namespace XMenAdventure

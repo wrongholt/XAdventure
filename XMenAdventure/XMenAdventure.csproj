@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -24,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -113,8 +115,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Activities" />
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.0\lib\net45\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net45\System.Diagnostics.DiagnosticSource.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
@@ -141,24 +143,20 @@
       <DependentUpon>xmen.mdf</DependentUpon>
     </Content>
     <Content Include="css\styles.css" />
-    <Content Include="images\adam_warlock.png.jpg" />
     <Content Include="images\ammobelt.jpg" />
-    <Content Include="images\apocalypse.png.jpg" />
     <Content Include="images\Australian_Army_hat.png" />
-    <Content Include="images\banshee.png.jpg" />
+    <Content Include="images\beast.png" />
     <Content Include="images\colossus.png" />
+    <Content Include="images\crown.jpg" />
     <Content Include="images\deadpool.jpg" />
     <Content Include="images\deathlok.jpg" />
     <Content Include="images\doctor_strange.jpg" />
     <Content Include="images\gambit1.png" />
-    <Content Include="images\ghost_rider.png.jpg" />
-    <Content Include="images\hercules.png.jpg" />
+    <Content Include="images\ghost_rider.jpg" />
     <Content Include="images\juggernaut.jpg" />
-    <Content Include="images\ka_zar.png.jpg" />
     <Content Include="images\magik.jpg" />
     <Content Include="images\magik1.png" />
-    <Content Include="images\magneto.png.jpg" />
-    <Content Include="images\man_thing.jpg" />
+    <Content Include="images\magneto.jpg" />
     <Content Include="images\morph.jpg" />
     <Content Include="images\mystique.jpg" />
     <Content Include="images\polaris.jpg" />
@@ -183,16 +181,12 @@
     <Content Include="images\Police_Duty_Belt.jpg" />
     <Content Include="images\rainboots.jpg" />
     <Content Include="images\redHat.png" />
-    <Content Include="images\rogue.jpg" />
-    <Content Include="images\sabertooth.jpg" />
     <Content Include="images\stick2.png" />
     <Content Include="images\stick3.png" />
     <Content Include="images\stick4.png" />
     <Content Include="images\westernBelt.gif" />
     <Content Include="images\US_Navy_Hat_Admiral.jpg" />
     <Content Include="images\winterboots.jpg" />
-    <Content Include="images\X-Men_movie_logo.png" />
-    <Content Include="images\xmen.jpg" />
     <Content Include="images\Xmencomic-logo.svg.png" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -202,9 +196,16 @@
     <Content Include="Default.aspx" />
     <Content Include="CharEquipment.aspx" />
     <Content Include="LevelOne.aspx" />
+    <None Include="scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="scripts\jquery-3.3.1.js" />
+    <Content Include="scripts\jquery-3.3.1.min.js" />
+    <Content Include="scripts\jquery-3.3.1.slim.js" />
+    <Content Include="scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="scripts\jquery-ui.min.js" />
     <Content Include="SignUp.aspx" />
     <Content Include="combat.aspx" />
+    <Content Include="scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="scripts\jquery-3.3.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -267,6 +268,18 @@
     <Compile Include="Migrations\201801181348256_charHealth.cs" />
     <Compile Include="Migrations\201801181348256_charHealth.Designer.cs">
       <DependentUpon>201801181348256_charHealth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801230339333_stats.cs" />
+    <Compile Include="Migrations\201801230339333_stats.Designer.cs">
+      <DependentUpon>201801230339333_stats.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801292029061_CurrentHealth.cs" />
+    <Compile Include="Migrations\201801292029061_CurrentHealth.Designer.cs">
+      <DependentUpon>201801292029061_CurrentHealth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801292217321_Desc.cs" />
+    <Compile Include="Migrations\201801292217321_Desc.Designer.cs">
+      <DependentUpon>201801292217321_Desc.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\characterStats.cs" />
@@ -345,13 +358,25 @@
     <EmbeddedResource Include="Migrations\201801181348256_charHealth.resx">
       <DependentUpon>201801181348256_charHealth.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801230339333_stats.resx">
+      <DependentUpon>201801230339333_stats.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801292029061_CurrentHealth.resx">
+      <DependentUpon>201801292029061_CurrentHealth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801292217321_Desc.resx">
+      <DependentUpon>201801292217321_Desc.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ProjectExtensions>

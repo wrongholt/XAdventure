@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Data.Entity.Infrastructure;
 using System.Web.Security;
-using System.Web.UI.WebControls;
 using XMenAdventure.Models;
-using System.Security.Cryptography;
-using Microsoft.AspNet.Cryptography.KeyDerivation;
-using System.Text;
-using System.Windows.Forms;
 using System.Web.UI;
-using System.Activities;
 using System.Data.SqlClient;
 using System.Configuration;
 
@@ -71,9 +65,13 @@ namespace XMenAdventure
 
             while (dr.Read())
             {
-                newUser.charHealth = Convert.ToInt32(dr["charHealth"].ToString());
+                newUser.charHealth = Convert.ToInt32(dr["health"].ToString());
+                newUser.atk = Convert.ToInt32(dr["charAtk"].ToString());
+                newUser.def = Convert.ToInt32(dr["charDef"].ToString());
+                newUser.speed = Convert.ToInt32(dr["charSpeed"].ToString());
             }
                 string password = txtPassword.Text;
+
             PasswordHasher PH = new PasswordHasher();
             string hashed = PH.CreateHash(password);
 
